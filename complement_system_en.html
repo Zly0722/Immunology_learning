@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Complement System — Immunology Visual Guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap');
+
+:root {
+  --navy:    #0a1628;
+  --blue:    #1d4ed8;
+  --blue-m:  #3b82f6;
+  --blue-l:  #bfdbfe;
+  --blue-xl: #eff6ff;
+  --teal:    #0d9488;
+  --teal-l:  #99f6e4;
+  --teal-xl: #f0fdfa;
+  --purple:  #7c3aed;
+  --purple-l:#ddd6fe;
+  --purple-xl:#f5f3ff;
+  --red:     #dc2626;
+  --red-l:   #fecaca;
+  --red-xl:  #fff1f2;
+  --amber:   #d97706;
+  --amber-l: #fde68a;
+  --amber-xl:#fffbeb;
+  --green:   #16a34a;
+  --green-l: #bbf7d0;
+  --green-xl:#f0fdf4;
+  --bg:      #f1f5f9;
+  --card:    #ffffff;
+  --text:    #0f172a;
+  --muted:   #64748b;
+  --border:  #e2e8f0;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow:    0 4px 24px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.06);
+  --radius:  20px;
+}
+
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.75;
+  font-size: 15px;
+  overflow-x: hidden;
+}
+
+/* ── HERO ─────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  background: var(--navy);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* animated gradient orbs */
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 900px; height: 900px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(29,78,216,0.35) 0%, transparent 70%);
+  top: -300px; left: -200px;
+  animation: orbFloat 14s ease-in-out infinite;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(13,148,136,0.3) 0%, transparent 70%);
+  bottom: -200px; right: -100px;
+  animation: orbFloat 18s ease-in-out infinite reverse;
+}
+@keyframes orbFloat {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33%      { transform: translate(40px,-30px) scale(1.05); }
+  66%      { transform: translate(-20px,20px) scale(0.97); }
+}
+
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 780px; }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 999px;
+  padding: 6px 18px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #93c5fd;
+  margin-bottom: 28px;
+}
+.hero-eyebrow span { width: 6px; height: 6px; border-radius: 50%; background: #60a5fa; animation: blink 2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.hero h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.05;
+  letter-spacing: -2px;
+  margin-bottom: 8px;
+}
+.hero h1 em { font-style: normal; color: #60a5fa; }
+
+.hero-sub {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: #94a3b8;
+  max-width: 560px;
+  margin: 20px auto 44px;
+  font-weight: 400;
+}
+
+.hero-stats {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 52px;
+}
+.stat-pill {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 14px 24px;
+  backdrop-filter: blur(12px);
+}
+.stat-pill .num {
+  font-size: 1.6rem; font-weight: 800;
+  background: linear-gradient(135deg, #60a5fa, #34d399);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-pill .label { font-size: 0.75rem; color: #94a3b8; margin-top: 2px; }
+
+/* floating protein dots */
+.protein {
+  position: absolute;
+  border-radius: 50%;
+  animation: floatProtein var(--dur, 8s) ease-in-out infinite var(--delay, 0s);
+  z-index: 1;
+}
+@keyframes floatProtein {
+  0%,100% { transform: translate(0,0) rotate(0deg); opacity: var(--opa, 0.5); }
+  50% { transform: translate(var(--tx,20px), var(--ty,-30px)) rotate(180deg); opacity: calc(var(--opa,0.5) + 0.2); }
+}
+
+.scroll-hint {
+  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: #475569; font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase;
+  z-index: 2;
+}
+.scroll-hint .chevrons { display: flex; flex-direction: column; gap: -2px; animation: bounce 2s ease-in-out infinite; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+/* ── NAV ──────────────────────────────────── */
+.nav {
+  position: sticky; top: 0; z-index: 1000;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(226,232,240,0.8);
+  box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; gap: 2px;
+  padding: 0 24px;
+  overflow-x: auto;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav a {
+  flex-shrink: 0;
+  display: block;
+  padding: 16px 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 2.5px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav a:hover { color: var(--blue); border-bottom-color: var(--blue); }
+
+/* ── LAYOUT ───────────────────────────────── */
+.container { max-width: 1140px; margin: 0 auto; padding: 56px 24px 80px; }
+
+.section {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 48px 52px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  transition: box-shadow 0.3s;
+}
+.section:hover { box-shadow: var(--shadow-lg); }
+
+.section-meta { font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.section-title { font-family: 'Playfair Display', Georgia, serif; font-size: 1.75rem; font-weight: 700; line-height: 1.2; margin-bottom: 24px; }
+.section-body { font-size: 0.96rem; color: #334155; line-height: 1.85; }
+.section-body p { margin-bottom: 14px; }
+.section-body strong { color: var(--text); font-weight: 700; }
+
+/* ── DIAGRAM CANVAS ───────────────────────── */
+.canvas {
+  background: linear-gradient(145deg, #f8fafc, #f1f5f9);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px 24px;
+  margin: 28px 0;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.canvas::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, #e2e8f0 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.5;
+}
+.canvas svg { position: relative; z-index: 1; }
+
+/* ── CALLOUT BOXES ────────────────────────── */
+.callout {
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin: 22px 0;
+  display: flex; gap: 14px; align-items: flex-start;
+  font-size: 0.92rem; font-weight: 500; line-height: 1.65;
+  border: 1.5px solid;
+}
+.callout .icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+.callout.blue   { background: var(--blue-xl);   border-color: var(--blue-l);   color: #1e40af; }
+.callout.teal   { background: var(--teal-xl);   border-color: var(--teal-l);   color: #0f766e; }
+.callout.purple { background: var(--purple-xl); border-color: var(--purple-l); color: #5b21b6; }
+.callout.red    { background: var(--red-xl);    border-color: var(--red-l);    color: #991b1b; }
+.callout.amber  { background: var(--amber-xl);  border-color: var(--amber-l);  color: #92400e; }
+.callout.green  { background: var(--green-xl);  border-color: var(--green-l);  color: #15803d; }
+
+/* ── CARDS ────────────────────────────────── */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); gap: 16px; margin: 26px 0; }
+.card {
+  border-radius: 16px;
+  padding: 24px 20px;
+  border: 1.5px solid var(--border);
+  text-align: center;
+  transition: transform 0.25s, box-shadow 0.25s;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: var(--accent, var(--blue));
+}
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.card-emoji { font-size: 2.2rem; margin-bottom: 12px; }
+.card-name { font-weight: 700; font-size: 0.93rem; margin-bottom: 6px; color: var(--text); }
+.card-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+
+/* ── FLOW ─────────────────────────────────── */
+.flow { display: flex; flex-direction: column; align-items: center; max-width: 480px; margin: 28px auto; }
+.flow-box {
+  width: 100%;
+  border-radius: 12px;
+  padding: 13px 24px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 2px solid;
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.flow-arr {
+  width: 2px; height: 32px;
+  position: relative;
+}
+.flow-arr::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 50%; transform: translateX(-50%);
+  border-width: 7px 5px 0 5px;
+  border-style: solid;
+  border-color: inherit transparent transparent transparent;
+}
+
+/* ── TABLE ────────────────────────────────── */
+.table-wrap { border-radius: 14px; overflow: hidden; border: 1px solid var(--border); margin: 22px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+thead tr { background: var(--navy); }
+thead th { color: #fff; padding: 14px 18px; text-align: left; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.5px; }
+tbody td { padding: 13px 18px; border-bottom: 1px solid var(--border); color: #334155; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(even) td { background: #fafbfc; }
+tbody tr:hover td { background: var(--blue-xl); }
+
+/* ── VOCAB ────────────────────────────────── */
+.vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px,1fr)); gap: 14px; margin: 24px 0; }
+.vocab-item {
+  display: flex; gap: 14px; align-items: flex-start;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.vocab-item:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+.vocab-term { font-weight: 700; font-size: 0.87rem; color: var(--blue); min-width: 115px; flex-shrink: 0; padding-top: 1px; }
+.vocab-def { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
+
+/* ── BALANCE ──────────────────────────────── */
+.balance { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 22px 0; }
+.balance-side { border-radius: 14px; padding: 22px; border: 2px solid; }
+.balance-side h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 10px; }
+.balance-side p  { font-size: 0.84rem; line-height: 1.6; }
+
+/* ── CHAPTER HEADER ───────────────────────── */
+.chap-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  border-radius: 999px;
+  padding: 5px 14px;
+  margin-bottom: 10px;
+}
+
+/* ── HIGHLIGHT QUOTE ──────────────────────── */
+.quote {
+  border-left: 4px solid var(--blue);
+  padding: 12px 22px;
+  background: var(--blue-xl);
+  border-radius: 0 12px 12px 0;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: #1e3a8a;
+  margin: 22px 0;
+  line-height: 1.6;
+}
+
+/* ── UTILITY ──────────────────────────────── */
+.mt { margin-top: 28px; }
+.row { display: flex; gap: 20px; align-items: flex-start; }
+.col { flex: 1; }
+
+@media (max-width:700px) {
+  .section { padding: 28px 20px; }
+  .balance, .row { grid-template-columns: 1fr; flex-direction: column; }
+  .hero h1 { letter-spacing: -1px; }
+  .stat-pill .num { font-size: 1.2rem; }
+}
+
+/* ── SECTION ACCENT COLORS ────────────────── */
+.accent-blue   { --accent: var(--blue); }
+.accent-teal   { --accent: var(--teal); }
+.accent-purple { --accent: var(--purple); }
+.accent-red    { --accent: var(--red); }
+.accent-amber  { --accent: var(--amber); }
+.accent-green  { --accent: var(--green); }
+.accent-navy   { --accent: var(--navy); }
+
+/* section top accent bar */
+.section { border-top: 4px solid var(--accent, var(--blue)); }
+
+/* step numbers */
+.step-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  font-size: 0.8rem; font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* two-col text-diagram layout */
+.split { display: grid; grid-template-columns: 1fr 1.3fr; gap: 32px; align-items: center; }
+@media(max-width:760px){ .split { grid-template-columns: 1fr; } }
+
+/* summary big flow section */
+.big-flow-section {
+  background: linear-gradient(135deg, var(--navy) 0%, #1e3a5f 60%, #0d3d31 100%);
+  border-top-color: #60a5fa;
+}
+.big-flow-section .section-meta { color: #60a5fa; }
+.big-flow-section .section-title { color: #fff; }
+.big-flow-section .section-body { color: #94a3b8; }
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<header class="hero">
+  <div class="hero-grid"></div>
+
+  <!-- floating proteins -->
+  <div class="protein" style="width:22px;height:22px;background:rgba(96,165,250,0.4);top:12%;left:8%;--dur:9s;--delay:0s;--tx:25px;--ty:-20px;--opa:0.45;"></div>
+  <div class="protein" style="width:14px;height:14px;background:rgba(52,211,153,0.45);top:60%;left:6%;--dur:11s;--delay:1.5s;--tx:-15px;--ty:25px;--opa:0.5;"></div>
+  <div class="protein" style="width:28px;height:28px;background:rgba(167,139,250,0.35);top:20%;right:7%;--dur:13s;--delay:0.5s;--tx:-20px;--ty:-30px;--opa:0.4;"></div>
+  <div class="protein" style="width:18px;height:18px;background:rgba(248,113,113,0.4);top:72%;right:9%;--dur:10s;--delay:2s;--tx:18px;--ty:15px;--opa:0.45;"></div>
+  <div class="protein" style="width:12px;height:12px;background:rgba(251,191,36,0.4);top:45%;right:4%;--dur:8s;--delay:1s;--tx:-12px;--ty:-22px;--opa:0.55;"></div>
+  <div class="protein" style="width:20px;height:20px;background:rgba(96,165,250,0.35);bottom:25%;left:15%;--dur:12s;--delay:3s;--tx:20px;--ty:-18px;--opa:0.4;"></div>
+  <div class="protein" style="width:10px;height:10px;background:rgba(52,211,153,0.5);bottom:30%;right:18%;--dur:7s;--delay:0.8s;--tx:-10px;--ty:18px;--opa:0.6;"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span></span>
+      Immunology · Innate Immunity
+    </div>
+
+    <h1>The <em>Complement</em><br>System</h1>
+
+    <p class="hero-sub">
+      An ancient protein-based defense network that marks, damages, recruits,
+      and directly destroys pathogens — before the adaptive immune system even wakes up.
+    </p>
+
+    <div class="hero-stats">
+      <div class="stat-pill">
+        <div class="num">30+</div>
+        <div class="label">Proteins</div>
+      </div>
+      <div class="stat-pill">
+        <div class="num">3</div>
+        <div class="label">Activation Pathways</div>
+      </div>
+      <div class="stat-pill">
+        <div class="num">∞</div>
+        <div class="label">Amplification</div>
+      </div>
+      <div class="stat-pill">
+        <div class="num">C3</div>
+        <div class="label">Central Protein</div>
+      </div>
+    </div>
+
+    <!-- mini overview diagram -->
+    <svg viewBox="0 0 560 120" width="min(560px,95vw)" style="position:relative;z-index:2;">
+      <defs>
+        <marker id="ha" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0 L0,7 L7,3.5 z" fill="rgba(148,163,184,0.8)"/>
+        </marker>
+      </defs>
+      <!-- nodes -->
+      <g>
+        <rect x="0"   y="40" width="90"  height="40" rx="10" fill="rgba(255,255,255,0.07)" stroke="rgba(96,165,250,0.5)" stroke-width="1.5"/>
+        <text x="45"  y="56" text-anchor="middle" font-size="9.5" fill="#93c5fd" font-weight="700" font-family="Inter,sans-serif">DETECT</text>
+        <text x="45"  y="72" text-anchor="middle" font-size="8"   fill="#64748b"  font-family="Inter,sans-serif">Danger signals</text>
+      </g>
+      <line x1="91" y1="60" x2="128" y2="60" stroke="rgba(148,163,184,0.5)" stroke-width="1.5" marker-end="url(#ha)"/>
+      <g>
+        <rect x="130" y="40" width="90"  height="40" rx="10" fill="rgba(255,255,255,0.07)" stroke="rgba(52,211,153,0.5)" stroke-width="1.5"/>
+        <text x="175" y="56" text-anchor="middle" font-size="9.5" fill="#34d399"  font-weight="700" font-family="Inter,sans-serif">ACTIVATE</text>
+        <text x="175" y="72" text-anchor="middle" font-size="8"   fill="#64748b"  font-family="Inter,sans-serif">C3 cascade</text>
+      </g>
+      <line x1="221" y1="60" x2="258" y2="60" stroke="rgba(148,163,184,0.5)" stroke-width="1.5" marker-end="url(#ha)"/>
+      <g>
+        <rect x="260" y="40" width="90"  height="40" rx="10" fill="rgba(255,255,255,0.07)" stroke="rgba(167,139,250,0.5)" stroke-width="1.5"/>
+        <text x="305" y="56" text-anchor="middle" font-size="9.5" fill="#c4b5fd"  font-weight="700" font-family="Inter,sans-serif">MARK</text>
+        <text x="305" y="72" text-anchor="middle" font-size="8"   fill="#64748b"  font-family="Inter,sans-serif">Opsonization</text>
+      </g>
+      <line x1="351" y1="60" x2="388" y2="60" stroke="rgba(148,163,184,0.5)" stroke-width="1.5" marker-end="url(#ha)"/>
+      <g>
+        <rect x="390" y="40" width="90"  height="40" rx="10" fill="rgba(255,255,255,0.07)" stroke="rgba(248,113,113,0.5)" stroke-width="1.5"/>
+        <text x="435" y="56" text-anchor="middle" font-size="9.5" fill="#fca5a5"  font-weight="700" font-family="Inter,sans-serif">DESTROY</text>
+        <text x="435" y="72" text-anchor="middle" font-size="8"   fill="#64748b"  font-family="Inter,sans-serif">MAC + phagocytes</text>
+      </g>
+      <line x1="481" y1="60" x2="518" y2="60" stroke="rgba(148,163,184,0.5)" stroke-width="1.5" marker-end="url(#ha)"/>
+      <g>
+        <rect x="520" y="40" width="40"  height="40" rx="10" fill="rgba(22,163,74,0.2)" stroke="rgba(74,222,128,0.5)" stroke-width="1.5"/>
+        <text x="540" y="64" text-anchor="middle" font-size="16" font-family="Inter,sans-serif">✓</text>
+      </g>
+      <!-- labels top -->
+      <text x="45"  y="22" text-anchor="middle" font-size="8" fill="#475569" font-family="Inter,sans-serif">Step 1</text>
+      <text x="175" y="22" text-anchor="middle" font-size="8" fill="#475569" font-family="Inter,sans-serif">Step 2</text>
+      <text x="305" y="22" text-anchor="middle" font-size="8" fill="#475569" font-family="Inter,sans-serif">Step 3</text>
+      <text x="435" y="22" text-anchor="middle" font-size="8" fill="#475569" font-family="Inter,sans-serif">Step 4</text>
+      <text x="540" y="22" text-anchor="middle" font-size="8" fill="#4ade80" font-family="Inter,sans-serif">Clear</text>
+    </svg>
+  </div>
+
+  <div class="scroll-hint">
+    <div>Scroll to explore</div>
+    <div class="chevrons">▾▾</div>
+  </div>
+</header>
+
+<!-- ─── NAV ─── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#what">What Is It</a>
+    <a href="#passive">Activation</a>
+    <a href="#cascade">Cascade</a>
+    <a href="#c3">C3 Protein</a>
+    <a href="#opson">Opsonization</a>
+    <a href="#mac">MAC</a>
+    <a href="#pathway">Alt. Pathway</a>
+    <a href="#teamwork">Teamwork</a>
+    <a href="#control">Control</a>
+    <a href="#summary">Summary</a>
+    <a href="#vocab">Vocab</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- ═══════════════════════════════════════════
+     01  WHAT IS THE COMPLEMENT SYSTEM?
+═══════════════════════════════════════════ -->
+<section class="section accent-blue" id="what">
+  <div class="chap-label" style="background:var(--blue-xl);color:var(--blue);">§ 1 – Core Concept</div>
+  <h2 class="section-title">What Is the Complement System?</h2>
+
+  <div class="split">
+    <div class="section-body">
+      <p>The complement system is one of the oldest and most important parts of the immune system. It is <strong>not made of cells</strong>. Instead, it consists of more than <strong>30 different proteins</strong> that float through body fluids, silently waiting.</p>
+      <p>When these proteins detect signs of danger — microbial surfaces, antibody signals, or spontaneous activation — they switch on. What follows is a rapid, self-amplifying protein cascade that can mark invaders, call for help, and sometimes destroy them outright.</p>
+
+      <div class="quote">
+        "A group of immune proteins that mark, damage, recruit against, and directly kill invaders."
+      </div>
+
+      <p>It belongs to the <strong>innate immune system</strong> — the body's fast, general-purpose defense that acts before any specific antibody or T cell is ready.</p>
+    </div>
+
+    <!-- radial SVG -->
+    <div class="canvas" style="min-height:280px;">
+      <svg viewBox="0 0 320 280" width="100%" style="max-width:320px;">
+        <defs>
+          <marker id="ra" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L7,3.5 z" fill="#1d4ed8"/>
+          </marker>
+          <radialGradient id="center-g" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#1e3a5f"/>
+            <stop offset="100%" stop-color="#0a1628"/>
+          </radialGradient>
+        </defs>
+        <!-- center -->
+        <circle cx="160" cy="140" r="52" fill="url(#center-g)"/>
+        <text x="160" y="133" text-anchor="middle" font-size="11" font-weight="800" fill="white" font-family="Inter,sans-serif">COMPLEMENT</text>
+        <text x="160" y="150" text-anchor="middle" font-size="9"  fill="#93c5fd" font-family="Inter,sans-serif">SYSTEM</text>
+        <text x="160" y="165" text-anchor="middle" font-size="18">🛡️</text>
+
+        <!-- spoke 1: detect -->
+        <circle cx="160" cy="36" r="32" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+        <text x="160" y="30" text-anchor="middle" font-size="8.5" font-weight="700" fill="#1d4ed8" font-family="Inter,sans-serif">DETECT</text>
+        <text x="160" y="44" text-anchor="middle" font-size="18">🔍</text>
+        <line x1="160" y1="68" x2="160" y2="88" stroke="#3b82f6" stroke-width="1.8" marker-end="url(#ra)"/>
+
+        <!-- spoke 2: mark -->
+        <circle cx="272" cy="100" r="32" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+        <text x="272" y="94" text-anchor="middle" font-size="8.5" font-weight="700" fill="#15803d" font-family="Inter,sans-serif">MARK</text>
+        <text x="272" y="108" text-anchor="middle" font-size="18">🏷️</text>
+        <line x1="243" y1="116" x2="215" y2="128" stroke="#16a34a" stroke-width="1.8" marker-end="url(#ra)"/>
+
+        <!-- spoke 3: kill -->
+        <circle cx="272" cy="192" r="32" fill="#fff1f2" stroke="#dc2626" stroke-width="2"/>
+        <text x="272" y="186" text-anchor="middle" font-size="8.5" font-weight="700" fill="#b91c1c" font-family="Inter,sans-serif">DESTROY</text>
+        <text x="272" y="200" text-anchor="middle" font-size="18">💥</text>
+        <line x1="243" y1="180" x2="215" y2="162" stroke="#dc2626" stroke-width="1.8" marker-end="url(#ra)"/>
+
+        <!-- spoke 4: recruit -->
+        <circle cx="48" cy="192" r="32" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+        <text x="48" y="186" text-anchor="middle" font-size="8.5" font-weight="700" fill="#6d28d9" font-family="Inter,sans-serif">RECRUIT</text>
+        <text x="48" y="200" text-anchor="middle" font-size="18">📣</text>
+        <line x1="77" y1="180" x2="108" y2="162" stroke="#7c3aed" stroke-width="1.8" marker-end="url(#ra)"/>
+
+        <!-- spoke 5: weaken -->
+        <circle cx="48" cy="100" r="32" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+        <text x="48" y="94" text-anchor="middle" font-size="8.5" font-weight="700" fill="#92400e" font-family="Inter,sans-serif">WEAKEN</text>
+        <text x="48" y="108" text-anchor="middle" font-size="18">⚔️</text>
+        <line x1="77" y1="116" x2="108" y2="128" stroke="#d97706" stroke-width="1.8" marker-end="url(#ra)"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="card-grid" style="margin-top:8px;">
+    <div class="card" style="--accent:var(--blue);">
+      <div class="card-emoji">⚡</div>
+      <div class="card-name">Lightning Fast</div>
+      <div class="card-desc">Responds within seconds, long before adaptive immunity activates</div>
+    </div>
+    <div class="card" style="--accent:var(--teal);">
+      <div class="card-emoji">🔁</div>
+      <div class="card-name">Self-Amplifying</div>
+      <div class="card-desc">One signal triggers thousands of protein activations through cascades</div>
+    </div>
+    <div class="card" style="--accent:var(--purple);">
+      <div class="card-emoji">🤝</div>
+      <div class="card-name">Cooperative</div>
+      <div class="card-desc">Works alongside macrophages, neutrophils, and cytokines</div>
+    </div>
+    <div class="card" style="--accent:var(--red);">
+      <div class="card-emoji">🎯</div>
+      <div class="card-name">Precise — Mostly</div>
+      <div class="card-desc">Targets foreign surfaces while body cells carry protective shields</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     02  PASSIVE UNTIL ACTIVATED
+═══════════════════════════════════════════ -->
+<section class="section accent-amber" id="passive">
+  <div class="chap-label" style="background:var(--amber-xl);color:var(--amber);">§ 4 – Activation Mechanism</div>
+  <h2 class="section-title">Silent by Design — Explosive When Triggered</h2>
+  <div class="section-body">
+    <p>Complement proteins are everywhere in body fluids, yet most are completely inert until activated. They work through <strong>conformational changes</strong> — shape shifts that unlock new binding capabilities. This "off by default" design is a safety feature: an always-on complement would attack the body's own tissues.</p>
+  </div>
+
+  <div class="split" style="margin-top:24px;">
+    <div class="flow">
+      <div class="flow-box" style="border-color:#94a3b8;color:#475569;">🔒 Inactive complement protein<br><small style="font-weight:400;color:#94a3b8;">Floating harmlessly in body fluid</small></div>
+      <div class="flow-arr" style="background:#f59e0b;border-color:#f59e0b;"></div>
+      <div class="flow-box" style="border-color:#d97706;color:#92400e;background:#fffbeb;">⚡ Activation signal received<br><small style="font-weight:400;color:#b45309;">Microbial surface / antibody / spontaneous</small></div>
+      <div class="flow-arr" style="background:#0d9488;border-color:#0d9488;"></div>
+      <div class="flow-box" style="border-color:#0d9488;color:#0f766e;background:#f0fdfa;">🔄 Protein changes shape<br><small style="font-weight:400;color:#0d9488;">New binding sites exposed</small></div>
+      <div class="flow-arr" style="background:#1d4ed8;border-color:#1d4ed8;"></div>
+      <div class="flow-box" style="border-color:#1d4ed8;color:#1e40af;background:#eff6ff;">✅ Active — can bind · recruit · attack · amplify</div>
+    </div>
+
+    <div>
+      <div class="callout amber">
+        <span class="icon">⚠️</span>
+        <div>Complement proteins must be kept dormant because they are <strong>inherently dangerous</strong>. Without proper control, they would attack healthy tissue — a phenomenon seen in several autoimmune diseases.</div>
+      </div>
+
+      <div class="canvas" style="min-height:160px;margin-top:16px;">
+        <svg viewBox="0 0 360 150" width="100%" style="max-width:360px;">
+          <defs>
+            <marker id="sa" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+              <path d="M0,0 L0,7 L7,3.5 z" fill="#d97706"/>
+            </marker>
+          </defs>
+          <!-- before -->
+          <rect x="10" y="40" width="140" height="70" rx="12" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+          <circle cx="80" cy="68" r="22" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
+          <text x="80" y="73" text-anchor="middle" font-size="10" fill="#94a3b8" font-family="Inter,sans-serif" font-weight="600">Inactive</text>
+          <text x="80" y="97" text-anchor="middle" font-size="8.5" fill="#64748b" font-family="Inter,sans-serif">Compact, closed shape</text>
+          <text x="80" y="22" text-anchor="middle" font-size="9" fill="#94a3b8" font-family="Inter,sans-serif" font-weight="700">BEFORE</text>
+
+          <!-- arrow -->
+          <line x1="155" y1="75" x2="200" y2="75" stroke="#d97706" stroke-width="2" stroke-dasharray="5" marker-end="url(#sa)"/>
+          <text x="178" y="65" text-anchor="middle" font-size="8.5" fill="#d97706" font-family="Inter,sans-serif" font-weight="600">Triggered</text>
+
+          <!-- after -->
+          <rect x="210" y="40" width="140" height="70" rx="12" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+          <circle cx="280" cy="68" r="22" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <!-- binding arms -->
+          <line x1="280" y1="46" x2="280" y2="32" stroke="#3b82f6" stroke-width="3" stroke-linecap="round"/>
+          <line x1="263" y1="56" x2="252" y2="46" stroke="#3b82f6" stroke-width="3" stroke-linecap="round"/>
+          <line x1="297" y1="56" x2="308" y2="46" stroke="#3b82f6" stroke-width="3" stroke-linecap="round"/>
+          <text x="280" y="73" text-anchor="middle" font-size="10" fill="#1d4ed8" font-family="Inter,sans-serif" font-weight="700">Active</text>
+          <text x="280" y="97" text-anchor="middle" font-size="8.5" fill="#64748b" font-family="Inter,sans-serif">Open, arms ready to bind</text>
+          <text x="280" y="22" text-anchor="middle" font-size="9" fill="#1d4ed8" font-family="Inter,sans-serif" font-weight="700">AFTER</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     03  CASCADE
+═══════════════════════════════════════════ -->
+<section class="section accent-purple" id="cascade">
+  <div class="chap-label" style="background:var(--purple-xl);color:var(--purple);">§ 5 – Key Mechanism</div>
+  <h2 class="section-title">The Cascade: One Signal → Thousands</h2>
+  <div class="section-body">
+    <p>The defining feature of the complement system is the <strong>cascade</strong>. One activated protein activates several others, which activate even more. A tiny spark becomes a firestorm in seconds.</p>
+  </div>
+
+  <div class="canvas" style="min-height:300px;">
+    <svg viewBox="0 0 720 290" width="100%" style="max-width:720px;">
+      <defs>
+        <filter id="glow-p">
+          <feGaussianBlur stdDeviation="4" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- L0: 1 -->
+      <circle cx="360" cy="34" r="22" fill="#7c3aed" filter="url(#glow-p)"/>
+      <text x="360" y="39" text-anchor="middle" font-size="13" fill="white" font-weight="800" font-family="Inter,sans-serif">1</text>
+      <text x="360" y="14" text-anchor="middle" font-size="9" fill="#a78bfa" font-family="Inter,sans-serif">Initial signal</text>
+
+      <!-- L0→L1 lines -->
+      <line x1="347" y1="55" x2="255" y2="98" stroke="#a78bfa" stroke-width="1.5"/>
+      <line x1="373" y1="55" x2="465" y2="98" stroke="#a78bfa" stroke-width="1.5"/>
+
+      <!-- L1: 2 -->
+      <circle cx="240" cy="112" r="18" fill="#8b5cf6"/>
+      <text x="240" y="117" text-anchor="middle" font-size="11" fill="white" font-weight="700" font-family="Inter,sans-serif">1</text>
+      <circle cx="480" cy="112" r="18" fill="#8b5cf6"/>
+      <text x="480" y="117" text-anchor="middle" font-size="11" fill="white" font-weight="700" font-family="Inter,sans-serif">1</text>
+      <text x="360" y="88" text-anchor="middle" font-size="9" fill="#8b5cf6" font-family="Inter,sans-serif" font-weight="700">×2</text>
+
+      <!-- L1→L2 lines -->
+      <line x1="228" y1="129" x2="172" y2="170" stroke="#c4b5fd" stroke-width="1.2"/>
+      <line x1="252" y1="129" x2="308" y2="170" stroke="#c4b5fd" stroke-width="1.2"/>
+      <line x1="468" y1="129" x2="412" y2="170" stroke="#c4b5fd" stroke-width="1.2"/>
+      <line x1="492" y1="129" x2="548" y2="170" stroke="#c4b5fd" stroke-width="1.2"/>
+
+      <!-- L2: 4 -->
+      <circle cx="158" cy="185" r="14" fill="#a78bfa"/>
+      <text x="158" y="190" text-anchor="middle" font-size="10" fill="white" font-weight="700" font-family="Inter,sans-serif">1</text>
+      <circle cx="322" cy="185" r="14" fill="#a78bfa"/>
+      <text x="322" y="190" text-anchor="middle" font-size="10" fill="white" font-weight="700" font-family="Inter,sans-serif">1</text>
+      <circle cx="398" cy="185" r="14" fill="#a78bfa"/>
+      <text x="398" y="190" text-anchor="middle" font-size="10" fill="white" font-weight="700" font-family="Inter,sans-serif">1</text>
+      <circle cx="562" cy="185" r="14" fill="#a78bfa"/>
+      <text x="562" y="190" text-anchor="middle" font-size="10" fill="white" font-weight="700" font-family="Inter,sans-serif">1</text>
+      <text x="360" y="158" text-anchor="middle" font-size="9" fill="#8b5cf6" font-family="Inter,sans-serif" font-weight="700">×2 again</text>
+
+      <!-- L2→L3 dots suggestion -->
+      <text x="360" y="232" text-anchor="middle" font-size="10" fill="#6d28d9" font-weight="700" font-family="Inter,sans-serif">↓  ↓  ↓</text>
+
+      <!-- final -->
+      <rect x="160" y="248" width="400" height="38" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/>
+      <text x="360" y="263" text-anchor="middle" font-size="11" fill="#6d28d9" font-weight="800" font-family="Inter,sans-serif">Thousands of active proteins</text>
+      <text x="360" y="278" text-anchor="middle" font-size="9"  fill="#7c3aed" font-family="Inter,sans-serif">A single bacterium covered within seconds</text>
+
+      <!-- time axis -->
+      <line x1="680" y1="20" x2="680" y2="270" stroke="#e2e8f0" stroke-width="1.5" stroke-dasharray="4"/>
+      <text x="702" y="70" font-size="8" fill="#94a3b8" font-family="Inter,sans-serif" writing-mode="vertical-rl">TIME →</text>
+    </svg>
+  </div>
+
+  <div class="callout purple">
+    <span class="icon">🌊</span>
+    <div>This makes the complement system <strong>fast and explosive</strong>. Once it latches onto a foreign surface, it rapidly multiplies and coats the invader — all before a single immune cell arrives.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     04  C3 — THE CENTRAL PROTEIN
+═══════════════════════════════════════════ -->
+<section class="section accent-teal" id="c3">
+  <div class="chap-label" style="background:var(--teal-xl);color:var(--teal);">§ 6 – 9 · Central Protein</div>
+  <h2 class="section-title">C3: The Linchpin of the Entire System</h2>
+  <div class="section-body">
+    <p>Among all complement proteins, <strong>C3</strong> is the most central. When activated, it cleaves into two fragments that perform completely different — yet equally vital — roles.</p>
+  </div>
+
+  <!-- C3 splitting diagram -->
+  <div class="canvas" style="min-height:240px;">
+    <svg viewBox="0 0 660 230" width="100%" style="max-width:660px;">
+      <defs>
+        <linearGradient id="c3g" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%"  stop-color="#0d9488"/>
+          <stop offset="100%" stop-color="#0369a1"/>
+        </linearGradient>
+        <marker id="ta" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0 L0,7 L7,3.5 z" fill="#0d9488"/>
+        </marker>
+        <marker id="ba" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0 L0,7 L7,3.5 z" fill="#1d4ed8"/>
+        </marker>
+        <filter id="glow-t">
+          <feGaussianBlur stdDeviation="5" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- C3 -->
+      <ellipse cx="330" cy="56" rx="72" ry="36" fill="url(#c3g)" filter="url(#glow-t)"/>
+      <text x="330" y="50" text-anchor="middle" font-size="20" font-weight="900" fill="white" font-family="Inter,sans-serif">C3</text>
+      <text x="330" y="70" text-anchor="middle" font-size="9.5" fill="#a7f3d0" font-family="Inter,sans-serif">Central Complement Protein</text>
+
+      <!-- scissors label -->
+      <text x="330" y="108" text-anchor="middle" font-size="11" fill="#64748b" font-family="Inter,sans-serif">✂  Cleaved by protease</text>
+
+      <!-- split lines -->
+      <line x1="295" y1="92" x2="175" y2="152" stroke="#0d9488" stroke-width="2.5" marker-end="url(#ta)"/>
+      <line x1="365" y1="92" x2="488" y2="152" stroke="#1d4ed8" stroke-width="2.5" marker-end="url(#ba)"/>
+
+      <!-- C3a -->
+      <ellipse cx="130" cy="178" rx="105" ry="40" fill="#f0fdfa" stroke="#0d9488" stroke-width="2.5"/>
+      <text x="130" y="168" text-anchor="middle" font-size="18" font-weight="900" fill="#0f766e" font-family="Inter,sans-serif">C3a</text>
+      <text x="130" y="184" text-anchor="middle" font-size="9.5" fill="#0f766e" font-family="Inter,sans-serif">Alarm Signal</text>
+      <text x="130" y="207" text-anchor="middle" font-size="18">📣 🧲</text>
+
+      <!-- C3b -->
+      <ellipse cx="530" cy="178" rx="115" ry="40" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2.5"/>
+      <text x="530" y="168" text-anchor="middle" font-size="18" font-weight="900" fill="#1e40af" font-family="Inter,sans-serif">C3b</text>
+      <text x="530" y="184" text-anchor="middle" font-size="9.5" fill="#1e40af" font-family="Inter,sans-serif">Opsonin Tag</text>
+      <text x="530" y="207" text-anchor="middle" font-size="18">🏷️ 🔁</text>
+    </svg>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Fragment</th><th>Main Role</th><th>How It Behaves</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:#0f766e;font-size:1rem;">C3a</strong></td>
+          <td>Alarm signal — attracts and activates immune cells</td>
+          <td>Diffuses away from the infection site like a chemical distress flare; functions similarly to cytokines</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#1e40af;font-size:1rem;">C3b</strong></td>
+          <td>Opsonin — sticks to microbes and marks them for destruction</td>
+          <td>Binds tightly to the bacterial surface, changes shape, recruits more complement proteins, and seeds an amplification platform</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout teal">
+    <span class="icon">🔑</span>
+    <div>C3 is the pivot of the entire system. It connects alarm signaling, microbial tagging, cascade amplification, and the assembly of the killing weapon — all from one cleavage event.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     05  OPSONIZATION
+═══════════════════════════════════════════ -->
+<section class="section accent-blue" id="opson">
+  <div class="chap-label" style="background:var(--blue-xl);color:var(--blue);">§ 8 – Opsonization</div>
+  <h2 class="section-title">Opsonization: Making Bacteria Irresistible to Eat</h2>
+
+  <div class="split">
+    <div class="section-body">
+      <p>Bacteria often have surfaces that actively <strong>repel immune cells</strong> or are simply too slippery to grab. Opsonization solves this problem.</p>
+      <p>When C3b and other complement proteins coat a bacterium, they act like molecular handles. Macrophages and neutrophils carry <strong>complement receptors (CR1, CR3)</strong> that grip these handles, pulling the bacterium in for destruction.</p>
+      <div class="callout blue" style="margin-top:18px;">
+        <span class="icon">🍽️</span>
+        <div>The word <em>opsonize</em> comes from the Greek <strong>opsonein</strong> — "to prepare food." Complement literally seasons bacteria to make them more appetizing to phagocytes.</div>
+      </div>
+    </div>
+
+    <div class="canvas" style="min-height:300px;">
+      <svg viewBox="0 0 380 300" width="100%" style="max-width:380px;">
+        <defs>
+          <marker id="oa" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L7,3.5 z" fill="#94a3b8"/>
+          </marker>
+          <marker id="oa-g" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L7,3.5 z" fill="#16a34a"/>
+          </marker>
+        </defs>
+
+        <!-- BEFORE label -->
+        <text x="82" y="18" text-anchor="middle" font-size="9" fill="#94a3b8" font-weight="700" font-family="Inter,sans-serif">BEFORE</text>
+        <!-- bare bacterium -->
+        <circle cx="82" cy="80" r="46" fill="#fef2f2" stroke="#f87171" stroke-width="2.5" stroke-dasharray="6"/>
+        <text x="82" y="76" text-anchor="middle" font-size="9" font-weight="700" fill="#b91c1c" font-family="Inter,sans-serif">Bacterium</text>
+        <text x="82" y="92" text-anchor="middle" font-size="22">🦠</text>
+
+        <!-- macrophage fail -->
+        <text x="82" y="150" text-anchor="middle" font-size="30">🫐</text>
+        <text x="82" y="185" text-anchor="middle" font-size="8.5" fill="#dc2626" font-weight="600" font-family="Inter,sans-serif">Can't grab — slips away ✗</text>
+
+        <!-- arrow right -->
+        <line x1="148" y1="120" x2="220" y2="120" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5" marker-end="url(#oa)"/>
+        <rect x="152" y="100" width="65" height="32" rx="6" fill="white" stroke="#e2e8f0"/>
+        <text x="184" y="112" text-anchor="middle" font-size="8.5" fill="#0d9488" font-weight="700" font-family="Inter,sans-serif">C3b coats</text>
+        <text x="184" y="125" text-anchor="middle" font-size="8.5" fill="#0d9488" font-family="Inter,sans-serif">bacterium</text>
+
+        <!-- AFTER label -->
+        <text x="310" y="18" text-anchor="middle" font-size="9" fill="#1d4ed8" font-weight="700" font-family="Inter,sans-serif">AFTER</text>
+        <!-- opsonized bacterium -->
+        <circle cx="310" cy="80" r="46" fill="#fef2f2" stroke="#f87171" stroke-width="2"/>
+
+        <!-- C3b tags -->
+        <circle cx="310" cy="30" r="9" fill="#2563eb" opacity="0.9"/>
+        <text x="310" y="34" text-anchor="middle" font-size="6.5" fill="white" font-weight="700" font-family="Inter,sans-serif">C3b</text>
+        <circle cx="354" cy="52" r="9" fill="#2563eb" opacity="0.9"/>
+        <text x="354" y="56" text-anchor="middle" font-size="6.5" fill="white" font-weight="700" font-family="Inter,sans-serif">C3b</text>
+        <circle cx="357" cy="106" r="9" fill="#2563eb" opacity="0.85"/>
+        <text x="357" y="110" text-anchor="middle" font-size="6.5" fill="white" font-weight="700" font-family="Inter,sans-serif">C3b</text>
+        <circle cx="330" cy="125" r="9" fill="#2563eb" opacity="0.85"/>
+        <text x="330" y="129" text-anchor="middle" font-size="6.5" fill="white" font-weight="700" font-family="Inter,sans-serif">C3b</text>
+        <circle cx="284" cy="127" r="9" fill="#2563eb" opacity="0.85"/>
+        <text x="284" y="131" text-anchor="middle" font-size="6.5" fill="white" font-weight="700" font-family="Inter,sans-serif">C3b</text>
+        <circle cx="264" cy="52" r="9" fill="#2563eb" opacity="0.9"/>
+        <text x="264" y="56" text-anchor="middle" font-size="6.5" fill="white" font-weight="700" font-family="Inter,sans-serif">C3b</text>
+
+        <text x="310" y="75" text-anchor="middle" font-size="9" font-weight="700" fill="#b91c1c" font-family="Inter,sans-serif">Bacterium</text>
+        <text x="310" y="91" text-anchor="middle" font-size="22">🦠</text>
+
+        <!-- macrophage success -->
+        <text x="310" y="155" text-anchor="middle" font-size="30">🫐</text>
+        <!-- receptor lines -->
+        <line x1="300" y1="148" x2="303" y2="130" stroke="#16a34a" stroke-width="1.8" stroke-dasharray="3" marker-end="url(#oa-g)"/>
+        <line x1="320" y1="148" x2="315" y2="130" stroke="#16a34a" stroke-width="1.8" stroke-dasharray="3" marker-end="url(#oa-g)"/>
+        <text x="310" y="192" text-anchor="middle" font-size="8.5" fill="#16a34a" font-weight="700" font-family="Inter,sans-serif">Receptors bind — engulfed! ✓</text>
+
+        <!-- legend -->
+        <circle cx="228" cy="238" r="7" fill="#2563eb"/>
+        <text x="240" y="243" font-size="9" fill="#334155" font-family="Inter,sans-serif">C3b opsonin tag</text>
+        <rect x="222" y="255" width="14" height="14" rx="3" fill="#fef2f2" stroke="#f87171" stroke-width="1.5"/>
+        <text x="240" y="266" font-size="9" fill="#334155" font-family="Inter,sans-serif">Bacterium surface</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     AMPLIFICATION LOOP
+═══════════════════════════════════════════ -->
+<section class="section accent-purple">
+  <div class="chap-label" style="background:var(--purple-xl);color:var(--purple);">§ 7 – Amplification</div>
+  <h2 class="section-title">The C3b Amplification Loop</h2>
+  <div class="section-body">
+    <p>Once C3b attaches to a bacterial surface, it changes shape and begins recruiting more complement proteins. Together they form a <strong>C3 convertase</strong> — a molecular machine that produces even more C3b. This creates a runaway positive-feedback loop.</p>
+  </div>
+
+  <div class="canvas" style="min-height:280px;">
+    <svg viewBox="0 0 560 270" width="100%" style="max-width:560px;">
+      <defs>
+        <marker id="loop-a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#7c3aed"/>
+        </marker>
+      </defs>
+
+      <!-- bacterium center -->
+      <circle cx="280" cy="135" r="52" fill="#fef2f2" stroke="#f87171" stroke-width="2.5"/>
+      <text x="280" y="130" text-anchor="middle" font-size="11" font-weight="700" fill="#b91c1c" font-family="Inter,sans-serif">Bacterium</text>
+      <text x="280" y="150" text-anchor="middle" font-size="28">🦠</text>
+
+      <!-- growing C3b coverage circles -->
+      <circle cx="280" cy="78" r="11" fill="#7c3aed"/>
+      <text x="280" y="83" text-anchor="middle" font-size="7" fill="white" font-weight="700" font-family="Inter,sans-serif">C3b</text>
+      <circle cx="335" cy="95" r="11" fill="#7c3aed"/>
+      <text x="335" y="100" text-anchor="middle" font-size="7" fill="white" font-weight="700" font-family="Inter,sans-serif">C3b</text>
+      <circle cx="340" cy="165" r="11" fill="#7c3aed"/>
+      <text x="340" y="170" text-anchor="middle" font-size="7" fill="white" font-weight="700" font-family="Inter,sans-serif">C3b</text>
+      <circle cx="300" cy="186" r="11" fill="#7c3aed"/>
+      <text x="300" y="191" text-anchor="middle" font-size="7" fill="white" font-weight="700" font-family="Inter,sans-serif">C3b</text>
+      <circle cx="252" cy="186" r="11" fill="#7c3aed"/>
+      <text x="252" y="191" text-anchor="middle" font-size="7" fill="white" font-weight="700" font-family="Inter,sans-serif">C3b</text>
+      <circle cx="224" cy="95" r="11" fill="#7c3aed"/>
+      <text x="224" y="100" text-anchor="middle" font-size="7" fill="white" font-weight="700" font-family="Inter,sans-serif">C3b</text>
+
+      <!-- Step boxes -->
+      <rect x="10" y="18" width="118" height="44" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1.5"/>
+      <text x="69" y="36" text-anchor="middle" font-size="9.5" fill="#5b21b6" font-weight="700" font-family="Inter,sans-serif">① C3 activated</text>
+      <text x="69" y="52" text-anchor="middle" font-size="8.5" fill="#7c3aed" font-family="Inter,sans-serif">splits → C3a + C3b</text>
+
+      <rect x="432" y="18" width="118" height="44" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+      <text x="491" y="36" text-anchor="middle" font-size="9.5" fill="#1e40af" font-weight="700" font-family="Inter,sans-serif">② C3b binds</text>
+      <text x="491" y="52" text-anchor="middle" font-size="8.5" fill="#2563eb" font-family="Inter,sans-serif">sticks to surface</text>
+
+      <rect x="432" y="208" width="118" height="44" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+      <text x="491" y="226" text-anchor="middle" font-size="9.5" fill="#15803d" font-weight="700" font-family="Inter,sans-serif">③ C3 convertase</text>
+      <text x="491" y="242" text-anchor="middle" font-size="8.5" fill="#22c55e" font-family="Inter,sans-serif">forms on surface</text>
+
+      <rect x="10" y="208" width="118" height="44" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+      <text x="69" y="226" text-anchor="middle" font-size="9.5" fill="#92400e" font-weight="700" font-family="Inter,sans-serif">④ More C3b</text>
+      <text x="69" y="242" text-anchor="middle" font-size="8.5" fill="#d97706" font-family="Inter,sans-serif">sticks again → repeat</text>
+
+      <!-- Circular arrows -->
+      <path d="M128,40 Q280,-22 432,40" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6" marker-end="url(#loop-a)"/>
+      <path d="M550,62 Q600,135 550,208" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6" marker-end="url(#loop-a)"/>
+      <path d="M432,230 Q280,292 128,230" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6" marker-end="url(#loop-a)"/>
+      <path d="M10,208 Q-40,135 10,62" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6" marker-end="url(#loop-a)"/>
+    </svg>
+  </div>
+  <div class="callout purple">
+    <span class="icon">⏱️</span>
+    <div>Within seconds, thousands of C3b molecules can coat a single bacterium — transforming it from a stealthy invader into an unmistakable target.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     06  MEMBRANE ATTACK COMPLEX
+═══════════════════════════════════════════ -->
+<section class="section accent-red" id="mac">
+  <div class="chap-label" style="background:var(--red-xl);color:var(--red);">§ 10 – Terminal Weapon</div>
+  <h2 class="section-title">Membrane Attack Complex (MAC)</h2>
+  <div class="section-body">
+    <p>The most dramatic complement weapon is the <strong>Membrane Attack Complex</strong> — a ring-shaped protein assembly that literally punches a hole through a bacterial membrane. The hole cannot be repaired, and the bacterium loses osmotic control and dies.</p>
+    <p>MAC is most effective against <strong>Gram-negative bacteria</strong>, whose thin peptidoglycan walls leave the outer membrane exposed to complement attack.</p>
+  </div>
+
+  <div class="canvas" style="min-height:220px;">
+    <svg viewBox="0 0 720 200" width="100%" style="max-width:720px;">
+      <defs>
+        <marker id="rma" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0 L0,7 L7,3.5 z" fill="#dc2626"/>
+        </marker>
+        <filter id="glow-r">
+          <feGaussianBlur stdDeviation="3" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- Stage 1 -->
+      <rect x="10" y="40" width="145" height="120" rx="14" fill="white" stroke="var(--border)" stroke-width="1.5"/>
+      <text x="82" y="60" text-anchor="middle" font-size="9" fill="#64748b" font-weight="700" font-family="Inter,sans-serif">① Proteins Gather</text>
+      <circle cx="62" cy="100" r="11" fill="#fca5a5" stroke="#dc2626" stroke-width="1.5"/>
+      <circle cx="82" cy="85"  r="11" fill="#fca5a5" stroke="#dc2626" stroke-width="1.5"/>
+      <circle cx="102" cy="100" r="11" fill="#fca5a5" stroke="#dc2626" stroke-width="1.5"/>
+      <circle cx="82" cy="115" r="11" fill="#fca5a5" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="82" y="150" text-anchor="middle" font-size="8.5" fill="#94a3b8" font-family="Inter,sans-serif">C5b-8 complex forms</text>
+
+      <line x1="158" y1="100" x2="182" y2="100" stroke="#dc2626" stroke-width="2" marker-end="url(#rma)"/>
+
+      <!-- Stage 2 -->
+      <rect x="188" y="40" width="145" height="120" rx="14" fill="white" stroke="var(--border)" stroke-width="1.5"/>
+      <text x="260" y="60" text-anchor="middle" font-size="9" fill="#64748b" font-weight="700" font-family="Inter,sans-serif">② Ring Assembles</text>
+      <circle cx="260" cy="100" r="30" fill="none" stroke="#dc2626" stroke-width="5"/>
+      <circle cx="260" cy="100" r="16" fill="#fee2e2"/>
+      <text x="260" y="150" text-anchor="middle" font-size="8.5" fill="#94a3b8" font-family="Inter,sans-serif">Pore ring complete</text>
+
+      <line x1="336" y1="100" x2="360" y2="100" stroke="#dc2626" stroke-width="2" marker-end="url(#rma)"/>
+
+      <!-- Stage 3 -->
+      <rect x="366" y="40" width="145" height="120" rx="14" fill="white" stroke="var(--border)" stroke-width="1.5"/>
+      <text x="438" y="60" text-anchor="middle" font-size="9" fill="#64748b" font-weight="700" font-family="Inter,sans-serif">③ Membrane Pierced</text>
+      <!-- membrane -->
+      <rect x="386" y="88"  width="110" height="8" rx="2" fill="#fcd34d" opacity="0.7"/>
+      <rect x="386" y="100" width="110" height="8" rx="2" fill="#fcd34d" opacity="0.5"/>
+      <!-- hole -->
+      <rect x="424" y="84" width="32" height="16" rx="0" fill="#0a1628" opacity="0.9" filter="url(#glow-r)"/>
+      <!-- MAC barrel in hole -->
+      <rect x="428" y="86" width="24" height="12" rx="2" fill="#dc2626" opacity="0.85"/>
+      <text x="440" y="96" text-anchor="middle" font-size="7" fill="white" font-weight="700" font-family="Inter,sans-serif">MAC</text>
+      <text x="438" y="150" text-anchor="middle" font-size="8.5" fill="#94a3b8" font-family="Inter,sans-serif">Irreparable pore</text>
+
+      <line x1="514" y1="100" x2="538" y2="100" stroke="#dc2626" stroke-width="2" marker-end="url(#rma)"/>
+
+      <!-- Stage 4 -->
+      <rect x="544" y="40" width="165" height="120" rx="14" fill="white" stroke="var(--border)" stroke-width="1.5"/>
+      <text x="627" y="60" text-anchor="middle" font-size="9" fill="#64748b" font-weight="700" font-family="Inter,sans-serif">④ Bacterium Destroyed</text>
+      <circle cx="627" cy="100" r="36" fill="#fef2f2" stroke="#f87171" stroke-width="2" stroke-dasharray="5"/>
+      <text x="627" y="104" text-anchor="middle" font-size="28" font-family="Inter,sans-serif">💥</text>
+      <text x="627" y="150" text-anchor="middle" font-size="8.5" fill="#dc2626" font-weight="600" font-family="Inter,sans-serif">Lysis — cell dead</text>
+    </svg>
+  </div>
+
+  <div class="callout red">
+    <span class="icon">🔴</span>
+    <div>The pore formed by MAC cannot be self-repaired. Fluid rushes in, ions leak out, and the bacterium either <strong>bursts (lysis)</strong> or loses the ability to maintain its internal environment — either way, it dies.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     07  ALTERNATIVE PATHWAY
+═══════════════════════════════════════════ -->
+<section class="section accent-teal" id="pathway">
+  <div class="chap-label" style="background:var(--teal-xl);color:var(--teal);">§ 12 – Activation Route</div>
+  <h2 class="section-title">The Alternative Pathway</h2>
+  <div class="section-body">
+    <p>Of the three complement activation routes, the <strong>alternative pathway</strong> is uniquely powerful: it requires no antibodies and can ignite spontaneously on any microbial surface it touches. It is the backbone of early innate defense.</p>
+  </div>
+
+  <div class="flow" style="max-width:520px;">
+    <div class="flow-box" style="border-color:#cbd5e1;color:#475569;background:#f8fafc;">
+      C3 undergoes low-level <strong>spontaneous hydrolysis</strong> — always ticking over
+    </div>
+    <div class="flow-arr" style="background:var(--teal);border-color:var(--teal);"></div>
+    <div class="flow-box" style="border-color:var(--teal);color:#0f766e;background:var(--teal-xl);">
+      C3b is released and randomly contacts a nearby surface
+    </div>
+    <div class="flow-arr" style="background:var(--teal);border-color:var(--teal);"></div>
+    <div class="flow-box" style="border-color:var(--blue);color:#1e40af;background:var(--blue-xl);">
+      On <strong>self cells</strong>: regulatory proteins destroy C3b immediately → no reaction<br>
+      On <strong>microbes</strong>: C3b survives and binds tightly → pathway ignites
+    </div>
+    <div class="flow-arr" style="background:var(--purple);border-color:var(--purple);"></div>
+    <div class="flow-box" style="border-color:var(--purple);color:#5b21b6;background:var(--purple-xl);">
+      Factor B binds C3b → Factor D cleaves Factor B → <strong>C3 convertase forms</strong>
+    </div>
+    <div class="flow-arr" style="background:var(--purple);border-color:var(--purple);"></div>
+    <div class="flow-box" style="border-color:var(--purple);color:#5b21b6;background:var(--purple-xl);">
+      C3 convertase cleaves more C3 → <strong>amplification loop begins</strong>
+    </div>
+    <div class="flow-arr" style="background:var(--red);border-color:var(--red);"></div>
+    <div class="flow-box" style="border-color:var(--red);color:#991b1b;background:var(--red-xl);">
+      💥 Bacterium coated in C3b → opsonized + MAC assembly triggered
+    </div>
+  </div>
+
+  <div class="callout teal">
+    <span class="icon">🔑</span>
+    <div>The key insight: <strong>the alternative pathway distinguishes self from non-self not by recognition, but by regulation</strong>. Microbes lack the regulatory proteins that protect host cells — so complement attacks them and spares us.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     08  TEAMWORK
+═══════════════════════════════════════════ -->
+<section class="section accent-green" id="teamwork">
+  <div class="chap-label" style="background:var(--green-xl);color:var(--green);">§ 13 – Cooperation</div>
+  <h2 class="section-title">Complement Doesn't Fight Alone</h2>
+  <div class="section-body">
+    <p>Complement is one layer in a multi-wave defense. It synergizes with every other component of innate immunity — and amplifies signals that eventually recruit adaptive immunity as well.</p>
+  </div>
+
+  <div class="canvas" style="min-height:200px;">
+    <svg viewBox="0 0 720 175" width="100%" style="max-width:720px;">
+      <defs>
+        <marker id="ta2" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0 L0,7 L7,3.5 z" fill="#cbd5e1"/>
+        </marker>
+      </defs>
+      <!-- timeline -->
+      <line x1="40" y1="90" x2="680" y2="90" stroke="#e2e8f0" stroke-width="3"/>
+
+      <!-- nodes -->
+      <!-- 1 barrier -->
+      <circle cx="80" cy="90" r="20" fill="#0a1628"/>
+      <text x="80" y="95" text-anchor="middle" font-size="14" font-family="Inter,sans-serif">🧱</text>
+      <text x="80" y="124" text-anchor="middle" font-size="9" fill="#64748b" font-weight="700" font-family="Inter,sans-serif">Barrier</text>
+      <text x="80" y="137" text-anchor="middle" font-size="8" fill="#94a3b8" font-family="Inter,sans-serif">breached</text>
+
+      <line x1="101" y1="90" x2="138" y2="90" stroke="#cbd5e1" stroke-width="2" marker-end="url(#ta2)"/>
+
+      <!-- 2 macrophage -->
+      <circle cx="160" cy="90" r="20" fill="#0d9488"/>
+      <text x="160" y="95" text-anchor="middle" font-size="14" font-family="Inter,sans-serif">🦠</text>
+      <text x="160" y="124" text-anchor="middle" font-size="9" fill="#64748b" font-weight="700" font-family="Inter,sans-serif">Macrophages</text>
+      <text x="160" y="137" text-anchor="middle" font-size="8" fill="#94a3b8" font-family="Inter,sans-serif">detect & eat</text>
+      <text x="160" y="60" text-anchor="middle" font-size="22" font-family="Inter,sans-serif">🔍</text>
+
+      <line x1="181" y1="90" x2="222" y2="90" stroke="#cbd5e1" stroke-width="2" marker-end="url(#ta2)"/>
+
+      <!-- 3 cytokines -->
+      <circle cx="244" cy="90" r="20" fill="#7c3aed"/>
+      <text x="244" y="95" text-anchor="middle" font-size="14" font-family="Inter,sans-serif">📡</text>
+      <text x="244" y="124" text-anchor="middle" font-size="9" fill="#64748b" font-weight="700" font-family="Inter,sans-serif">Cytokines</text>
+      <text x="244" y="137" text-anchor="middle" font-size="8" fill="#94a3b8" font-family="Inter,sans-serif">alarm signals</text>
+      <text x="244" y="60" text-anchor="middle" font-size="22" font-family="Inter,sans-serif">📣</text>
+
+      <line x1="265" y1="90" x2="306" y2="90" stroke="#cbd5e1" stroke-width="2" marker-end="url(#ta2)"/>
+
+      <!-- 4 inflammation -->
+      <circle cx="328" cy="90" r="20" fill="#dc2626"/>
+      <text x="328" y="95" text-anchor="middle" font-size="14" font-family="Inter,sans-serif">🔥</text>
+      <text x="328" y="124" text-anchor="middle" font-size="9" fill="#64748b" font-weight="700" font-family="Inter,sans-serif">Inflammation</text>
+      <text x="328" y="137" text-anchor="middle" font-size="8" fill="#94a3b8" font-family="Inter,sans-serif">fluid & cells rush in</text>
+
+      <line x1="349" y1="90" x2="390" y2="90" stroke="#cbd5e1" stroke-width="2" marker-end="url(#ta2)"/>
+
+      <!-- 5 neutrophils -->
+      <circle cx="412" cy="90" r="20" fill="#d97706"/>
+      <text x="412" y="95" text-anchor="middle" font-size="14" font-family="Inter,sans-serif">⚔️</text>
+      <text x="412" y="124" text-anchor="middle" font-size="9" fill="#64748b" font-weight="700" font-family="Inter,sans-serif">Neutrophils</text>
+      <text x="412" y="137" text-anchor="middle" font-size="8" fill="#94a3b8" font-family="Inter,sans-serif">aggressive killers</text>
+      <text x="412" y="60" text-anchor="middle" font-size="22" font-family="Inter,sans-serif">💪</text>
+
+      <line x1="433" y1="90" x2="474" y2="90" stroke="#cbd5e1" stroke-width="2" marker-end="url(#ta2)"/>
+
+      <!-- 6 complement -->
+      <circle cx="496" cy="90" r="20" fill="#1d4ed8"/>
+      <text x="496" y="95" text-anchor="middle" font-size="14" font-family="Inter,sans-serif">🛡️</text>
+      <text x="496" y="124" text-anchor="middle" font-size="9" fill="#64748b" font-weight="700" font-family="Inter,sans-serif">Complement</text>
+      <text x="496" y="137" text-anchor="middle" font-size="8" fill="#94a3b8" font-family="Inter,sans-serif">mark, tag, kill</text>
+      <text x="496" y="60" text-anchor="middle" font-size="22" font-family="Inter,sans-serif">🧬</text>
+
+      <line x1="517" y1="90" x2="558" y2="90" stroke="#cbd5e1" stroke-width="2" marker-end="url(#ta2)"/>
+
+      <!-- 7 cleared -->
+      <circle cx="580" cy="90" r="20" fill="#16a34a"/>
+      <text x="580" y="95" text-anchor="middle" font-size="16" font-family="Inter,sans-serif">✓</text>
+      <text x="580" y="124" text-anchor="middle" font-size="9" fill="#16a34a" font-weight="700" font-family="Inter,sans-serif">Cleared!</text>
+      <text x="580" y="137" text-anchor="middle" font-size="8" fill="#4ade80" font-family="Inter,sans-serif">infection resolved</text>
+
+      <!-- Inflammation brace -->
+      <path d="M160,155 Q250,170 328,155" fill="none" stroke="#fca5a5" stroke-width="1.5" stroke-dasharray="4"/>
+      <path d="M328,155 Q412,170 496,155" fill="none" stroke="#fca5a5" stroke-width="1.5" stroke-dasharray="4"/>
+      <text x="328" y="172" text-anchor="middle" font-size="8.5" fill="#dc2626" font-weight="600" font-family="Inter,sans-serif">🔥 Inflammation amplifies everything</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     09  BALANCE & CONTROL
+═══════════════════════════════════════════ -->
+<section class="section accent-amber" id="control">
+  <div class="chap-label" style="background:var(--amber-xl);color:var(--amber);">§ 14 – Regulation</div>
+  <h2 class="section-title">Powerful and Dangerous: The Need for Control</h2>
+  <div class="section-body">
+    <p>Complement proteins can activate spontaneously. Without robust inhibition, they would attack healthy tissues — a problem seen in diseases like <strong>paroxysmal nocturnal hemoglobinuria</strong> and <strong>atypical hemolytic uremic syndrome</strong>. The immune system must walk a razor's edge.</p>
+  </div>
+
+  <div class="balance">
+    <div class="balance-side" style="background:var(--green-xl);border-color:#86efac;">
+      <h4 style="color:#15803d;">✅ Must Activate Fast Enough</h4>
+      <p style="color:#166534;">Even a small wound can let bacteria replicate faster than a slow immune response can control. Speed is survival — delays of minutes can mean the difference between containment and sepsis.</p>
+    </div>
+    <div class="balance-side" style="background:var(--red-xl);border-color:#fca5a5;">
+      <h4 style="color:#b91c1c;">⚠️ Must Stay Controlled Enough</h4>
+      <p style="color:#991b1b;">Runaway complement activity attacks host tissues. Regulators like Factor H, Factor I, CD55 (DAF), and CD59 constantly dismantle complement that lands on self cells.</p>
+    </div>
+  </div>
+
+  <div class="table-wrap" style="margin-top:20px;">
+    <table>
+      <thead><tr><th>Regulatory Protein</th><th>What It Does</th><th>Where Active</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Factor H</strong></td><td>Binds C3b on host cells; accelerates degradation</td><td>Fluid phase + host cell surfaces</td></tr>
+        <tr><td><strong>Factor I</strong></td><td>Cleaves and inactivates C3b (with cofactors)</td><td>Requires Factor H or MCP</td></tr>
+        <tr><td><strong>CD55 / DAF</strong></td><td>Accelerates decay of C3 convertase on self cells</td><td>Host cell membranes only</td></tr>
+        <tr><td><strong>CD59</strong></td><td>Blocks MAC assembly on self cell membranes</td><td>Host cell membranes only</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout amber">
+    <span class="icon">⚖️</span>
+    <div>Pathogens that survive complement attacks have evolved countermeasures — they steal host regulatory proteins, secrete inhibitors, or coat themselves in materials that mimic self-cell surfaces.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     10  VIRUSES
+═══════════════════════════════════════════ -->
+<section class="section accent-purple">
+  <div class="chap-label" style="background:var(--purple-xl);color:var(--purple);">§ 11 – Limitations</div>
+  <h2 class="section-title">Complement vs. Viruses: A Harder Battle</h2>
+  <div class="section-body">
+    <p>Complement excels against bacteria because their large surfaces are easily coated. Viruses present a harder problem for three key reasons:</p>
+  </div>
+  <div class="card-grid">
+    <div class="card" style="--accent:var(--purple);">
+      <div class="card-emoji">🔬</div>
+      <div class="card-name">Extremely Small</div>
+      <div class="card-desc">Tiny surface area means complement proteins rarely make random contact before the virus enters a cell</div>
+    </div>
+    <div class="card" style="--accent:var(--purple);">
+      <div class="card-emoji">🕵️</div>
+      <div class="card-name">Hide Inside Cells</div>
+      <div class="card-desc">Viruses replicate intracellularly — safe from extracellular complement in body fluids</div>
+    </div>
+    <div class="card" style="--accent:var(--purple);">
+      <div class="card-emoji">🏃</div>
+      <div class="card-name">Move Quickly</div>
+      <div class="card-desc">Cell-to-cell spread bypasses extracellular complement entirely</div>
+    </div>
+    <div class="card" style="--accent:var(--purple);">
+      <div class="card-emoji">🎭</div>
+      <div class="card-name">Steal Host Proteins</div>
+      <div class="card-desc">Some viruses bud with host CD55/CD59 — essentially wearing our own complement shields</div>
+    </div>
+  </div>
+  <div class="callout purple">
+    <span class="icon">🧬</span>
+    <div>Fighting viruses requires a different toolkit: interferons, NK cells, cytotoxic T lymphocytes, and neutralizing antibodies — all of which take days to fully deploy. Complement can help intercept free virions, but it is not the primary antiviral defense.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     11  SUMMARY
+═══════════════════════════════════════════ -->
+<section class="section big-flow-section" id="summary">
+  <div class="chap-label">§ 16 — Big Picture Summary</div>
+  <h2 class="section-title">The Complete Picture</h2>
+  <p class="section-body">The complement system is an ancient, protein-based defense network. Its central logic is elegantly simple:</p>
+
+  <div class="flow" style="max-width:520px;margin-top:28px;">
+    <div class="flow-box" style="background:#0a1628;border-color:#334155;color:#e2e8f0;">
+      🚨 Danger detected — microbial surface exposed
+    </div>
+    <div class="flow-arr" style="background:#60a5fa;border-color:#60a5fa;"></div>
+    <div class="flow-box" style="background:#1e3a5f;border-color:#3b82f6;color:#93c5fd;">
+      ⚡ C3 cleaves → C3a (alarm) + C3b (tag) released
+    </div>
+    <div class="flow-arr" style="background:#34d399;border-color:#34d399;"></div>
+    <div class="flow-box" style="background:#0d3d31;border-color:#34d399;color:#a7f3d0;">
+      📣 C3a alerts immune cells — recruitment begins
+    </div>
+    <div class="flow-arr" style="background:#60a5fa;border-color:#60a5fa;"></div>
+    <div class="flow-box" style="background:#1e3a5f;border-color:#3b82f6;color:#93c5fd;">
+      🏷️ C3b coats bacterium → amplification loop ignites
+    </div>
+    <div class="flow-arr" style="background:#34d399;border-color:#34d399;"></div>
+    <div class="flow-box" style="background:#0d3d31;border-color:#34d399;color:#a7f3d0;">
+      🍽️ Opsonization — phagocytes engulf the tagged bacterium
+    </div>
+    <div class="flow-arr" style="background:#f87171;border-color:#f87171;"></div>
+    <div class="flow-box" style="background:#3d1515;border-color:#f87171;color:#fca5a5;">
+      💥 MAC assembles → membrane pierced → bacterium lysed
+    </div>
+    <div class="flow-arr" style="background:#4ade80;border-color:#4ade80;"></div>
+    <div class="flow-box" style="background:#052e16;border-color:#4ade80;color:#bbf7d0;">
+      ✅ Infection cleared — homeostasis restored
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     VOCAB
+═══════════════════════════════════════════ -->
+<section class="section accent-blue" id="vocab">
+  <div class="chap-label" style="background:var(--blue-xl);color:var(--blue);">Key Vocabulary</div>
+  <h2 class="section-title">Essential Terms at a Glance</h2>
+
+  <div class="vocab-grid">
+    <div class="vocab-item">
+      <div class="vocab-term">Complement system</div>
+      <div class="vocab-def">Group of 30+ immune proteins that help detect, mark, recruit against, and destroy invaders</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Innate immunity</div>
+      <div class="vocab-def">Fast, non-specific defense present from birth — acts before adaptive immunity</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">C3</div>
+      <div class="vocab-def">The central complement protein; cleaves into C3a and C3b upon activation</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">C3a</div>
+      <div class="vocab-def">Alarm fragment of C3; acts as an anaphylatoxin that attracts and activates immune cells</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">C3b</div>
+      <div class="vocab-def">Opsonin fragment of C3; binds covalently to microbial surfaces and seeds amplification</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Cascade</div>
+      <div class="vocab-def">Chain reaction where each activated protein activates many others — exponential amplification</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Opsonization</div>
+      <div class="vocab-def">Coating an invader with proteins (C3b, antibodies) that phagocyte receptors can grab</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Phagocyte</div>
+      <div class="vocab-def">Immune cell that engulfs and digests pathogens; includes macrophages and neutrophils</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Macrophage</div>
+      <div class="vocab-def">Long-lived innate sentinel that detects, engulfs, and signals danger via cytokines</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Neutrophil</div>
+      <div class="vocab-def">Short-lived, rapidly recruited killer cell — aggressive but can damage surrounding tissue</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Cytokine</div>
+      <div class="vocab-def">Signaling protein released by immune cells to coordinate the response across tissues</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Inflammation</div>
+      <div class="vocab-def">Local emergency response — vasodilation + increased permeability floods tissue with immune players</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">MAC</div>
+      <div class="vocab-def">Membrane Attack Complex — ring-shaped complement weapon that punches lethal pores in membranes</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">C3 convertase</div>
+      <div class="vocab-def">Enzyme complex that cleaves C3 in bulk — the engine of the amplification loop</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Alternative pathway</div>
+      <div class="vocab-def">Antibody-independent complement route that ignites on any unprotected foreign surface</div>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-term">Anaphylatoxin</div>
+      <div class="vocab-def">Complement fragments (C3a, C5a) that trigger mast cell degranulation and immune cell recruitment</div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<footer style="text-align:center;padding:48px 24px;border-top:1px solid var(--border);color:var(--muted);">
+  <div style="font-size:2rem;margin-bottom:10px;">🛡️</div>
+  <div style="font-weight:800;font-size:1.1rem;color:var(--text);margin-bottom:4px;font-family:'Playfair Display',Georgia,serif;">The Complement System</div>
+  <div style="font-size:0.82rem;">Innate Immunity · Visual Study Guide · Immunology</div>
+</footer>
+
+</body>
+</html>
