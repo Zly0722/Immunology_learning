@@ -1,20 +1,11 @@
-# ***Cooking Tasty Receptor Recipes***
+# V(D)J Recombination — Cooking Tasty Receptor Recipes
 
+> How the adaptive immune system builds billions of unique receptors from a handful of gene fragments.
+> Related: [t-cell-selection.md](t-cell-selection.md) · [antigen-presentation.md](antigen-presentation.md)
 
-"Freshen up"
-to make someone or something up
+---
 
-let's freshen up our memories a bit.
-
-
-"Relevant"
-connect with what is happening or being discussed.
-
-"sink in| brush over | weird | tactic |"
-Let's sink in for a moment. It is sort of easy to brush over this fact without giving it the appropriate amount of wonder. What a weird tactic and even weirder that it works.
-
-
-# Adaptive Immune System — Key Concepts Summary
+## Adaptive Immune System — Key Concepts Summary
 
 ## Core Idea
 The adaptive immune system can recognize virtually every possible antigen in the universe — not by having millions of genes, but by **randomly combining a small number of gene fragments** to generate billions of unique receptors.
@@ -125,5 +116,17 @@ This is why the adaptive immune response takes days to ramp up, but becomes high
 | **Recognition** | Fixed receptors (e.g. Toll-like receptors) for common patterns | Randomly generated receptors covering virtually all antigens |
 | **Memory** | No | Yes — faster response on re-exposure |
 | **Key cells** | Macrophages, neutrophils, dendritic cells | T cells, B cells |
+
+---
+
+## English Vocabulary Notes
+
+| Phrase | Meaning | Example |
+|---|---|---|
+| **freshen up** | refresh / update something | "Let's freshen up our memories a bit." |
+| **relevant** | connected to what is being discussed | — |
+| **sink in** | (for an idea) to be fully understood | "Let's let this sink in for a moment." |
+| **brush over** | mention something quickly without enough attention | "It is easy to brush over this fact." |
+| **weird tactic** | a strange strategy | "What a weird tactic — and even weirder that it works." |
 
 

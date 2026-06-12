@@ -117,3 +117,66 @@ If the displayed peptide indicates infection or abnormality, CD8⁺ T cells can 
 
 ```text
 Inside the cell → MHC I → CD8⁺ T cell → killing
+```
+
+---
+
+## 9. MHC class II pathway
+
+MHC class II molecules mainly present **exogenous antigens**.
+
+Exogenous antigens come from outside the cell and are taken up by professional antigen-presenting cells (dendritic cells, macrophages, B cells).
+
+Examples include:
+
+- bacteria engulfed by phagocytosis
+- extracellular proteins and toxins taken up from tissue fluid
+- debris collected from the site of infection
+
+These materials are degraded inside vesicles into short peptides. The peptides are loaded onto MHC class II molecules and displayed on the cell surface.
+
+CD4⁺ helper T cells recognize MHC II–peptide complexes and then **coordinate** the immune response (help B cells, activate macrophages, recruit other cells).
+
+### Simple memory
+
+```text
+Outside the cell → engulfed → MHC II → CD4⁺ T cell → coordinate response
+```
+
+---
+
+## 10. Two pathways side by side
+
+```text
+ENDOGENOUS (made inside)      EXOGENOUS (taken from outside)
+        │                              │
+   degraded in cytosol           degraded in vesicles
+        │                              │
+      MHC I                          MHC II
+        │                              │
+   CD8⁺ killer T cell            CD4⁺ helper T cell
+        │                              │
+   "kill this cell"             "coordinate the response"
+```
+
+---
+
+## 11. Big-picture summary
+
+- T cells never see free antigen — they only read **MHC + peptide** on a cell surface.
+- **MHC I** reports what a cell is making *inside* → inspected by **CD8⁺** killers → infected/abnormal cells are destroyed.
+- **MHC II** reports what an APC has *eaten* from outside → inspected by **CD4⁺** helpers → the immune response is coordinated.
+- The **TCR** recognizes the complex; the **CD3** complex transmits the signal inside the T cell.
+- MHC is highly **polymorphic**, which strengthens the species against pathogens but complicates transplantation.
+
+---
+
+## ⚠️ Common Pitfalls 易错点
+
+1. **MHC class ≠ T cell class — but they pair predictably.** Memory hook: the numbers multiply to 8 → **MHC I × CD8**, **MHC II × CD4**.
+2. **Endogenous vs exogenous is about origin, not location of display.** Both pathways display on the *cell surface*; the difference is whether the protein was *made inside* (I) or *taken from outside* (II).
+3. **MHC and HLA are the same thing.** "HLA" is simply the human name for MHC. Don't treat them as two systems.
+4. **MHC/HLA are molecules, not cells.** CD4⁺/CD8⁺ are the cell types; MHC I/II are the display proteins they read.
+5. **The TCR alone cannot signal.** It recognizes the antigen but needs the **CD3 complex** to transmit the activation signal into the cell.
+6. **MHC I is on almost all *nucleated* cells** — not literally every cell (mature red blood cells lack a nucleus and MHC I).
+
